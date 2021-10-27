@@ -9,6 +9,7 @@ public class CheckCorrectSizeTest extends BaseTest {
     int number5 = 5;
     int number10 = 10;
     int number20 = 20;
+    int negativeNumber = -1;
     String bytes = "Bytes";
     String words = "Words";
     @Test
@@ -17,6 +18,13 @@ public class CheckCorrectSizeTest extends BaseTest {
         getBLL().pressRadioButton(words);
         getBLL().pressGenerateLorenIpsumButton();
         assertEquals(number10, getBLL().getAmount(words));
+    }
+    @Test
+    public void checkNegativeNumber(){
+        getBLL().setAmount(negativeNumber);
+        getBLL().pressRadioButton(words);
+        getBLL().pressGenerateLorenIpsumButton();
+        assertEquals(number5, getBLL().getAmount(words));
     }
     @Test
     public void checkFive(){
@@ -48,6 +56,14 @@ public class CheckCorrectSizeTest extends BaseTest {
         getBLL().pressRadioButton(bytes);
         getBLL().pressGenerateLorenIpsumButton();
         assertEquals(number20, getBLL().getAmount(bytes));
+    }
+    
+    @Test
+    public void checkByteNegativeNumber(){
+        getBLL().setAmount(negativeNumber);
+        getBLL().pressRadioButton(bytes);
+        getBLL().pressGenerateLorenIpsumButton();
+        assertEquals(number5, getBLL().getAmount(bytes));
     }
 
     @Test
