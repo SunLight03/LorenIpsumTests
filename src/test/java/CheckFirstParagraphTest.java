@@ -1,5 +1,6 @@
 
 import org.testng.annotations.Test;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 public class CheckFirstParagraphTest extends BaseTest {
@@ -10,4 +11,5 @@ public class CheckFirstParagraphTest extends BaseTest {
         getBLL().chooseRulang();
         assertTrue(getBLL().getTextInFirstParagraph().contains(wordInFirstParagraph));
     }
+
 }
