@@ -54,6 +54,18 @@ public class BusinessLogicLayer {
         RadioButton radioButton = new RadioButton(driver);
         radioButton.setValue(value);
     }
+    
+    
+    public double getAverageOfTenGenerations(){
+        HomePage homePage = new HomePage(driver);
+        double all = 0;
+        for (int i = 0; i < 10; i++) {
+            homePage.pressGenerateLorenIpsumButton();
+            ResultPage resultPage = new ResultPage(driver);
+            all = resultPage.getCountOfLorem();
+        }
+        return all % 10.0;
+    }
 
     public int getAmount(String value){
         int amount=0;
