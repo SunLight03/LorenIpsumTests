@@ -20,21 +20,18 @@ public class ResultPage extends BasePage {
         return generatedText.getText();
     }
 
-    public int getCountOfLorem() {
-        int allcounts = 0;
-        for (int i = 0; i <10; i++){
+   public int getCountOfLorem() {
             waitVisibilityOfElement(300, generatedText);
             genText = generatedText.getText();
             String[] genTextArr = genText.split("\n");
             int count = 0;
-            for (int j = 0; j < genTextArr.length; j++) {
-                if (genTextArr[j].toLowerCase().contains("lorem")) {
+            for (int i = 0; i < genTextArr.length; i++) {
+                if (genTextArr[i].toLowerCase().contains("lorem")) {
                     count++;
                 }
             }
-            allcounts += count;
-        }
-        return allcounts/10;
+            driver.navigate().back();
+        return count;
     }
 
     public int getAmountOfWords(String genText) {
