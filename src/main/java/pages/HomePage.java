@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
@@ -16,14 +17,19 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//input[@id='amount']")
     private WebElement amountOfWords;
 
-    @FindBy(xpath = "//input[@value='Generate Lorem Ipsum']")
+    @FindBy(id = "generate")
     private WebElement generateLorenIpsumButton;
 
     @FindBy(xpath = "//input[@id='start']")
     private WebElement startWithLorenIpsumCheckBox;
 
+
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    public void openHomePage(String url) {
+        driver.get(url);
     }
 
     public void pressRuLangButton() {
@@ -31,20 +37,26 @@ public class HomePage extends BasePage {
     }
 
     public String textOfFirstParagraph() {
+        waitVisibilityOfElement(300, firstParagraph);
         return firstParagraph.getText();
     }
 
-    public void setAmount(int Amount) {
+    public void setAmount(String amount) {
         amountOfWords.sendKeys(Keys.BACK_SPACE);
-        amountOfWords.sendKeys(String.valueOf(Amount));
-
+        amountOfWords.sendKeys(amount);
     }
 
     public void pressGenerateLorenIpsumButton() {
         generateLorenIpsumButton.click();
     }
 
-    public void uncheckStartWithLorenIpsum(){
+    public void moveToGenerateLorenIpsumButton() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(generateLorenIpsumButton);
+        actions.perform();
+    }
+
+    public void uncheckStartWithLorenIpsum() {
         startWithLorenIpsumCheckBox.click();
     }
 }

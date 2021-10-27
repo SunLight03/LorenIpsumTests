@@ -10,9 +10,15 @@ import pages.RadioButton;
 public class BusinessLogicLayer {
     WebDriver driver;
 
+
     public BusinessLogicLayer(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+    public void openHomePage(String url) {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage(url);
     }
 
     public void chooseRulang() {
@@ -35,28 +41,7 @@ public class BusinessLogicLayer {
         homePage.pressGenerateLorenIpsumButton();
     }
 
-    public void setAmount(int amount){
-        HomePage homePage = new HomePage(driver);
-        homePage.setAmount(amount);
-    }
-
-    public String getText() {
-        ResultPage resultPage = new ResultPage(driver);
-        return resultPage.getGeneratedText();
-    }
-
-    public int getNumberOfLorem(){
-        ResultPage resultPage = new ResultPage(driver);
-        return resultPage.getCountOfLorem();
-    }
-
-    public void pressRadioButton(String value){
-        RadioButton radioButton = new RadioButton(driver);
-        radioButton.setValue(value);
-    }
-    
-    
-    public double getAverageOfTenGenerations(){
+    public double getAverageOfTenGenerations() {
         HomePage homePage = new HomePage(driver);
         double all = 0;
         for (int i = 0; i < 10; i++) {
@@ -67,17 +52,40 @@ public class BusinessLogicLayer {
         return all % 10.0;
     }
 
-    public int getAmount(String value){
-        int amount=0;
+    public void setAmount(String amount) {
+        HomePage homePage = new HomePage(driver);
+        homePage.setAmount(amount);
+    }
+
+    public String getText() {
         ResultPage resultPage = new ResultPage(driver);
-        switch (value.toLowerCase()){
-            case("words"):
-                amount = resultPage.getAmountOfWords(resultPage.getGeneratedText());
-                break;
-            case ("bytes"):
-                amount =   resultPage.getAmountOfBytes(resultPage.getGeneratedText());
-                break;
-        }
-        return amount;
+        return resultPage.getGeneratedText();
+    }
+
+//    public int getNumberOfLorem() {
+//        ResultPage resultPage = new ResultPage(driver);
+//        return resultPage.getCountOfLorem();
+//    }
+
+    public void pressRadioButton(String value) {
+        RadioButton radioButton = new RadioButton(driver);
+        radioButton.setValue(value);
+    }
+
+    public void moveToGenerateLorenIpsumButton(){
+        HomePage homePage = new HomePage(driver);
+        homePage.moveToGenerateLorenIpsumButton();
+    }
+
+    public int getAmountOfWords() {
+        ResultPage resultPage = new ResultPage(driver);
+        return resultPage.getAmountOfWords(resultPage.getGeneratedText());
+
+    }
+
+    public int getAmountOfBytes() {
+        ResultPage resultPage = new ResultPage(driver);
+        return resultPage.getAmountOfBytes(resultPage.getGeneratedText());
+
     }
 }
